@@ -1,35 +1,58 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Header } from "./components/Header";
+import { ProductGrid } from "./components/ProductGrid";
+import { ProductDetail } from "./components/ProductDetail";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div className="min-h-screen bg-gray-50">
+        <Header />
+        <main>
+          <Routes>
+            <Route path="/" element={<ProductGrid />} />
+            <Route path="/product/:id" element={<ProductDetail />} />
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+        </main>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+const AboutPage = () => {
+  return (
+    <div className="container mx-auto px-4 py-8">
+      <div className="bg-white rounded-lg shadow-md p-8">
+        <h1 className="text-3xl font-bold text-gray-900 mb-6">
+          About Think41 Store
+        </h1>
+        <div className="prose max-w-none">
+          <p className="text-gray-600 mb-4">
+            Welcome to Think41 Store, your one-stop destination for quality
+            products across multiple categories. We offer a wide range of items
+            from trusted brands to meet all your shopping needs.
+          </p>
+          <p className="text-gray-600 mb-4">
+            Our platform features over 29,000 products across various categories
+            including:
+          </p>
+          <ul className="list-disc list-inside text-gray-600 mb-4">
+            <li>Sleep & Lounge</li>
+            <li>Swim</li>
+            <li>Undergarments</li>
+            <li>Socks</li>
+            <li>And many more...</li>
+          </ul>
+          <p className="text-gray-600">
+            Built with modern technology including React, TypeScript, Tailwind
+            CSS, and powered by a robust REST API.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+export default App;
