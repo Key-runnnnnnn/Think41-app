@@ -5,11 +5,13 @@ const router = express.Router();
 const productRoutes = require('./productRoutes');
 const categoryRoutes = require('./categoryRoutes');
 const brandRoutes = require('./brandRoutes');
+const departmentRoutes = require('./departmentRoutes');
 
 // Mount routes
 router.use('/products', productRoutes);
 router.use('/categories', categoryRoutes);
 router.use('/brands', brandRoutes);
+router.use('/departments', departmentRoutes);
 
 // Health check route
 router.get('/health', (req, res) => {

@@ -2,6 +2,7 @@
 const Product = require('./Product');
 const Category = require('./Category');
 const Brand = require('./Brand');
+const Department = require('./Department');
 const User = require('./User');
 const Cart = require('./Cart');
 const Order = require('./Order');
@@ -12,6 +13,7 @@ module.exports = {
   Product,
   Category,
   Brand,
+  Department,
   User,
   Cart,
   Order,

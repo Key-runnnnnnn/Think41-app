@@ -33,9 +33,9 @@ const productSchema = new mongoose.Schema({
     ]
   },
   department: {
-    type: String,
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Department',
     required: true,
-    enum: ['Men', 'Women'],
     index: true
   },
   cost: {

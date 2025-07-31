@@ -42,6 +42,7 @@ const getProducts = async (req, res) => {
     // Execute query with pagination
     const skip = (page - 1) * limit;
     const products = await Product.find(filter)
+      .populate('department', 'name slug')
       .sort(sort)
       .skip(skip)
       .limit(parseInt(limit))
@@ -91,7 +92,9 @@ const getProductById = async (req, res) => {
     const product = await Product.findOne({
       $or: searchConditions,
       isActive: true
-    }).select('-__v');
+    })
+      .populate('department', 'name slug')
+      .select('-__v');
 
     if (!product) {
       return res.status(404).json({
