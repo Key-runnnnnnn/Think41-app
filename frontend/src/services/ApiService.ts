@@ -64,11 +64,12 @@ export class ApiService {
   }
 
   static async getDepartments(): Promise<string[]> {
-    // This is a helper method to get unique departments
-    const response = await this.getProducts({ limit: 1000 });
-    const departments = [
-      ...new Set(response.data.map((product) => product.department)),
-    ];
-    return departments.sort();
+    // Get departments from the new API endpoint
+    const response = await fetch(`${API_BASE_URL}/departments`);
+    if (!response.ok) {
+      throw new Error(`Failed to fetch departments: ${response.statusText}`);
+    }
+    const data = await response.json();
+    return data.data.map((dept: any) => dept.name);
   }
 }
