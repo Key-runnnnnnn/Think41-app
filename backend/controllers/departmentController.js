@@ -13,6 +13,7 @@ const getDepartments = async (req, res) => {
       sortOrder = 'asc'
     } = req.query;
 
+    
     // Build filter object
     const filter = {};
 
