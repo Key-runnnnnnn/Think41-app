@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const { Product, Category, Brand } = require('../models');
 
 // Get all products with filtering, pagination, and search
@@ -75,12 +76,20 @@ const getProducts = async (req, res) => {
 const getProductById = async (req, res) => {
   try {
     const { id } = req.params;
+
+    // Build search conditions
+    const searchConditions = [
+      { productId: parseInt(id) },
+      { sku: id.toUpperCase() }
+    ];
+
+    // Only add ObjectId condition if id is a valid ObjectId
+    if (mongoose.Types.ObjectId.isValid(id)) {
+      searchConditions.unshift({ _id: id });
+    }
+
     const product = await Product.findOne({
-      $or: [
-        { _id: id },
-        { productId: parseInt(id) },
-        { sku: id.toUpperCase() }
-      ],
+      $or: searchConditions,
       isActive: true
     }).select('-__v');
 
